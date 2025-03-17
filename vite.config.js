@@ -10,4 +10,7 @@ export default defineConfig({
   server: {
     allowedHosts: ['modern-farming.parthlathiya.wiki'],
   },
+  preview: {
+    allowedHosts: ['modern-farming.parthlathiya.wiki', 'farmx.parthlathiya.wiki'],
+  },
 }); 

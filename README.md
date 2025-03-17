@@ -14,3 +14,4 @@
       PORT=3000 pm2 start npm --name "app-farmx" -- start
       pm2 save
       EOF
+

@@ -11,6 +11,6 @@
       pm2 stop app-farmx
       fi
       export PORT=3000
-      PORT=3000 pm2 start npm --name "app-farmx" -- start
+      pm2 start npm --name "app-farmx" -- start -- --port 3000
       pm2 save
       EOF

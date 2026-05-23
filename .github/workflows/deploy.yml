@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main
+      - production
 
 jobs:
   deploy_frontend:
@@ -21,15 +21,16 @@ jobs:
       - name: Deploy Frontend to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-          cd Modern-Farm-X
-          git checkout main
-          git pull origin main
+          cd FarmX
+          git checkout production
+          git pull origin production
           npm install
           npm run build
           # Check if the app is running and stop it if it is
-          if pm2 list | grep -q "modernfarmx-app"; then
-            pm2 stop modernfarmx-app
+          if pm2 list | grep -q "app-farmx"; then
+            pm2 stop app-farmx
           fi
-          pm2 start "npm run dev -- --host 0.0.0.0 --port 8789" --name "modernfarmx-app"
+          export PORT=3000
+          pm2 start npm --name "app-farmx" -- start -- --port 3000
           pm2 save
           EOF
